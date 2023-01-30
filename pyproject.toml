@@ -6,14 +6,14 @@ build-backend = "setuptools.build_meta"
 universal = true
 
 [project]
-name = "atlas"
+name = "atlas-framework"
 version = "0.1.0"
 authors = [
   { name="Grant Viklund", email="renderbox@gmail.com" },
 ]
 description = "Class-based famework for quickly creating robust Python apps."
 readme = "README.md"
-requires-python = ">=3.9,<3.12"
+requires-python = ">=3.8,<3.12"
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Intended Audience :: Developers",
@@ -31,12 +31,13 @@ dev = [
     "black",
     "flake8",
     "flake8-black",
+    "flake8-pyproject",
     "mypy",
     "bandit",
     "isort",
     "toml",
 ]
-test = ["coverage"]
+test = ["coverage", "pytest"]
 docs = [
     'coverage',
 ]
@@ -44,3 +45,9 @@ docs = [
 [project.urls]
 "Homepage" = "https://github.com/renderbox/atlas-framework"
 "Bug Tracker" = "https://github.com/renderbox/atlas-framework/issues"
+
+# [tool.black]
+
+[tool.flake8]
+ignore = ['E231', 'E241']
+max-line-length = 120

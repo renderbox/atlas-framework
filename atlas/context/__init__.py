@@ -31,7 +31,7 @@ class Context(dict):
 
     def __init__(self, args=None, config=None, *pargs, **kwargs):
         super().__init__(*pargs, **kwargs)
-        print("Generating Context")
+        # print("Generating Context")
         self.parse_config(config)
         self.parse_env()
         self.parse_args(args)

@@ -40,7 +40,14 @@ class AppBase:
 
     def parse_args(self):
         """parse args based on the input"""
-        return vars(self.argparser.parse_args())
+        args = self.argparser.parse_known_args()
+        try:
+            arg_dict = vars(
+                args
+            )  # This can fail with unrecognized arguments in the app
+        except TypeError:
+            arg_dict = {}
+        return arg_dict
 
     # Create and set the Context object
     def set_context(self, ctx):
