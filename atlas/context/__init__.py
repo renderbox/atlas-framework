@@ -1,9 +1,13 @@
 import os
 import re
 
-lower_snake_case_regex = re.compile(
+camel_case_split_regex = re.compile(
     "([a-z])([A-Z])"
 )  # Compiled for running over lots of keys
+
+
+def camel_case_spaced(key):
+    return camel_case_split_regex.sub(r"\1 \2", key)
 
 
 def lower_snake_case(instance, key):
@@ -11,7 +15,7 @@ def lower_snake_case(instance, key):
 
     * Note; since this called like a method in the instance, it needs to have an extra 'instance' argument (aka 'self')
     """
-    return lower_snake_case_regex.sub(r"\1_\2", key).lower()
+    return camel_case_split_regex.sub(r"\1_\2", key).lower()
 
 
 class Context(dict):
@@ -23,6 +27,7 @@ class Context(dict):
     # By default all keys will be reduced to lower_snake_case
     key_renamer = lower_snake_case
     config_parser = None
+    include_env = True
 
     def __init__(self, args=None, config=None, *pargs, **kwargs):
         super().__init__(*pargs, **kwargs)
@@ -44,8 +49,8 @@ class Context(dict):
     def parse_env(self):
         """Parses the environment and updates the context with values."""
         self.env = os.environ
-        print(self.env)
-        if self.env:
+        # print(self.env)
+        if self.env and self.include_env:
             self.update_context(**self.env)
 
     def parse_args(self, args):

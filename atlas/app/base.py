@@ -1,4 +1,4 @@
-from atlas.context import Context
+from atlas.context import Context, camel_case_spaced
 import argparse
 
 
@@ -7,16 +7,19 @@ class AppBase:
     ctx = None
     argparser = None
     description = "No Description set for this application"
-    app_name = "App Base"  # Human Friendly Name, default is class name
+    app_name = None  # Human Friendly Name like "App Base", default is class name
     epilog = None
     context_class = Context
 
     def __init__(self, ctx=None, argparser=None):
+        if not self.app_name:
+            self.app_name = camel_case_spaced(self.__class__.__name__)
+
         # If no argparser is set, create one
         if not argparser and not self.argparser:
             self.argparser = self.create_argparser()
 
-        self.add_args()
+        self.add_arguments()
 
         self.set_context(ctx)  # After the Arg Parser is created,
 
@@ -27,16 +30,17 @@ class AppBase:
             epilog=self.epilog,
         )
 
-    def add_args(self):
+    def add_arguments(self):
         """Args that need to be included in the app"""
         pass
 
-    def add_arg(self, *args, **kwargs):
+    def add_argument(self, *args, **kwargs):
+        """A wrapper around the arg parser to allow updates without breaking users code."""
         self.argparser.add_argument(*args, **kwargs)
 
     def parse_args(self):
         """parse args based on the input"""
-        return self.argparser.parse_args()
+        return vars(self.argparser.parse_args())
 
     # Create and set the Context object
     def set_context(self, ctx):
@@ -91,4 +95,5 @@ class AppBase:
         Args:
             ctx (Context): Context Object to work with.
         """
-        print("I do nothing yet.")
+        print("I do nothing yet except print my context.")
+        print(self.ctx)

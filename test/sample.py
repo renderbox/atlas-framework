@@ -2,8 +2,15 @@ from atlas.app.cli import CLIApp
 
 
 class SampleApp(CLIApp):
-    def add_args(self):
-        self.add_arg("-s", "--sample", help="A sample CLI argument")
+
+    description = "This is a sample App"
+
+    def add_arguments(self):
+        self.add_argument("-s", "--sample", help="A sample CLI argument")
+        self.add_argument("-v", "--verbose", action="store_true")
+
+    def run(self, ctx):
+        print("Hello All")
 
 
 def main():
@@ -12,3 +19,7 @@ def main():
     """
     app = SampleApp()
     app()
+
+
+if __name__ == "__main__":
+    main()
