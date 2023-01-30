@@ -1,5 +1,5 @@
-from atlas.context import Context, camel_case_spaced
 import argparse
+from atlas.context import Context, camel_case_spaced
 
 
 class AppBase:
@@ -92,7 +92,8 @@ class AppBase:
 
     def post(self):
         """
-        Called after the main run() method for any necessary cleanup or final steps.  This an entry point for a Mix-In Class.
+        Called after the main run() method for any necessary cleanup or final steps.  This an entry point for a Mix-In
+        Class.
         """
         pass
 
@@ -103,4 +104,4 @@ class AppBase:
             ctx (Context): Context Object to work with.
         """
         print("I do nothing yet except print my context.")
-        print(self.ctx)
+        print(ctx)

@@ -29,7 +29,7 @@ class Context(dict):
     config_parser = None
     include_env = True
 
-    def __init__(self, args=None, config=None, *pargs, **kwargs):
+    def __init__(self, *pargs, args=None, config=None, **kwargs):
         super().__init__(*pargs, **kwargs)
         # print("Generating Context")
         self.parse_config(config)
@@ -60,5 +60,5 @@ class Context(dict):
 
     def update_context(self, **kwargs):
         """Updates the context with values and renames the key."""
-        for key in kwargs:
-            self[self.key_renamer(key)] = kwargs[key]
+        for key, value in kwargs.items():
+            self[self.key_renamer(key)] = value
