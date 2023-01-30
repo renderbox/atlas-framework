@@ -21,7 +21,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-keywords = ["cli", "app", "framework"]
+keywords = ["cli", "app", "application", "framework"]
 dependencies = []
 
 
@@ -44,10 +44,3 @@ docs = [
 [project.urls]
 "Homepage" = "https://github.com/renderbox/atlas-framework"
 "Bug Tracker" = "https://github.com/renderbox/atlas-framework/issues"
-
-# [project.scripts]
-# hello-world = "test.sample:main"
-
-# Uncomment to include any non-python files
-# [tool.setuptools.package-data]
-# blogorama = ['*.html']
