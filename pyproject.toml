@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.distutils.bdist_wheel]
+universal = true
+
+[project]
+name = "atlas"
+version = "0.1.0"
+authors = [
+  { name="Grant Viklund", email="renderbox@gmail.com" },
+]
+description = "Class-based famework for quickly creating robust Python apps."
+readme = "README.md"
+requires-python = ">=3.9,<3.12"
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+keywords = ["cli", "app", "framework"]
+dependencies = []
+
+
+[project.optional-dependencies]
+dev = [
+    "ipython",
+    "black",
+    "flake8",
+    "flake8-black",
+    "mypy",
+    "bandit",
+    "isort",
+    "toml",
+]
+test = ["coverage"]
+docs = [
+    'coverage',
+]
+
+[project.urls]
+"Homepage" = "https://github.com/renderbox/atlas-framework"
+"Bug Tracker" = "https://github.com/renderbox/atlas-framework/issues"
+
+[project.scripts]
+hello-world = "atlas.cmd:heartbeat"
+
+# Uncomment to include any non-python files
+# [tool.setuptools.package-data]
+# blogorama = ['*.html']
