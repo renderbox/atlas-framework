@@ -1,9 +1,17 @@
 import os
+import re
+
+lower_snake_case_regex = re.compile(
+    "([a-z])([A-Z])"
+)  # Compiled for running over lots of keys
 
 
 def lower_snake_case(instance, key):
-    """input string is updated to be lower snake case"""
-    return key
+    """input string is updated to be lower snake case
+
+    * Note; since this called like a method in the instance, it needs to have an extra 'instance' argument (aka 'self')
+    """
+    return lower_snake_case_regex.sub(r"\1_\2", key).lower()
 
 
 class Context(dict):
