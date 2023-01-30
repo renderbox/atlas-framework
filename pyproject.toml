@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 universal = true
 
 [project]
-name = "atlas"
+name = "atlas-framework"
 version = "0.1.0"
 authors = [
   { name="Grant Viklund", email="renderbox@gmail.com" },
