@@ -4,10 +4,6 @@ import os
 from atlas.context import Context, camel_case_spaced, lower_snake_case
 
 
-class TestCtx(Context):
-    pass
-
-
 class TestContext(unittest.TestCase):
     def test_camel_case_spaced(self):
         self.assertEqual("Sample APp Pro", camel_case_spaced("SampleAPpPro"))
@@ -19,7 +15,7 @@ class TestContext(unittest.TestCase):
         os.environ, {"SUPER_ARGS": "mytemp", "USER_NAME": "bob"}, clear=True
     )
     def test_context_compiliation(self):
-        ctx = TestCtx(args={"super_args": "right_answer", "verbose": False})
+        ctx = Context(args={"super_args": "right_answer", "verbose": False})
         self.assertEqual(ctx["user_name"], "bob")
         self.assertEqual(ctx["super_args"], "right_answer")
         self.assertEqual(ctx["verbose"], False)

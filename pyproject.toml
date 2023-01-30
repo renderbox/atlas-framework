@@ -31,6 +31,7 @@ dev = [
     "black",
     "flake8",
     "flake8-black",
+    "flake8-pyproject",
     "mypy",
     "bandit",
     "isort",
@@ -44,3 +45,9 @@ docs = [
 [project.urls]
 "Homepage" = "https://github.com/renderbox/atlas-framework"
 "Bug Tracker" = "https://github.com/renderbox/atlas-framework/issues"
+
+# [tool.black]
+
+[tool.flake8]
+ignore = ['E231', 'E241']
+max-line-length = 120
