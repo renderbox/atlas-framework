@@ -45,8 +45,8 @@ docs = [
 "Homepage" = "https://github.com/renderbox/atlas-framework"
 "Bug Tracker" = "https://github.com/renderbox/atlas-framework/issues"
 
-[project.scripts]
-hello-world = "atlas.cmd:heartbeat"
+# [project.scripts]
+# hello-world = "test.sample:main"
 
 # Uncomment to include any non-python files
 # [tool.setuptools.package-data]

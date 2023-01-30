@@ -1,19 +1,24 @@
-from ..context import Context
+from atlas.context import Context
 import argparse
 
 
 class AppBase:
 
-
     ctx = None
     argparser = None
-    description = "What the program does"
+    description = "No Description set for this application"
     app_name = "App Base"  # Human Friendly Name, default is class name
     epilog = None
+    context_class = Context
 
-    def init(self, ctx=None, argparser=None):
+    def __init__(self, ctx=None, argparser=None):
+        # If no argparser is set, create one
         if not argparser and not self.argparser:
-            self.argparser =
+            self.argparser = self.create_argparser()
+
+        self.add_args()
+
+        self.set_context(ctx)  # After the Arg Parser is created,
 
     def create_argparser(self):
         return argparse.ArgumentParser(
@@ -26,29 +31,64 @@ class AppBase:
         """Args that need to be included in the app"""
         pass
 
+    def add_arg(self, *args, **kwargs):
+        self.argparser.add_argument(*args, **kwargs)
+
     def parse_args(self):
         """parse args based on the input"""
-        pass
+        return self.argparser.parse_args()
 
-    # Parse Args
+    # Create and set the Context object
+    def set_context(self, ctx):
+        """
+        Set Context will set the context to one passed in or will generate one.  One is provided only if it is
+        pre-generated somewhere else and passed in, like in the case of chaining App instances.
 
-    # Create Context
-    def set_context(self, args=None):
-        if not args:
-            args = self.argparser.parse_args()
-        self.ctx = Context(args)
+        Args:
+            ctx (Context): Context Class or None
+
+        Returns:
+            Context: Instance of the Context Class
+        """
+        self.ctx = ctx if ctx else self.context_class(args=self.parse_args())
         return self.ctx
 
     def __call__(self, ctx=None):
-        self.pre()
-        self.run()
+        """
+        This is the entry point to run the app.  It should not be overridden, and instead, just override the run()
+        method.
+
+        Args:
+            ctx (Context, optional): This is an optional context object. Defaults to None.
+        """
+        if not ctx:
+            ctx = self.ctx
+        ctx = self.pre(ctx)
+        self.run(ctx)
         self.post()
 
     def pre(self, ctx):
-        pass
+        """
+        A method that runs before the main application.  This an entry point for a Mix-In Class that modifies a context.
+
+        Args:
+            ctx (Context): The Context object to use.
+
+        Returns:
+            Context: The expected return context object.
+        """
+        return ctx
 
     def post(self):
+        """
+        Called after the main run() method for any necessary cleanup or final steps.  This an entry point for a Mix-In Class.
+        """
         pass
 
     def run(self, ctx):
-        pass
+        """Place where business logic is added in a subclassed app.
+
+        Args:
+            ctx (Context): Context Object to work with.
+        """
+        print("I do nothing yet.")
