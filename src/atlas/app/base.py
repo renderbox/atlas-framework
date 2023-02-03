@@ -40,10 +40,10 @@ class AppBase:
 
     def parse_args(self):
         """parse args based on the input"""
-        args = self.argparser.parse_known_args()
+        parsed, unknown = self.argparser.parse_known_args()
         try:
             arg_dict = vars(
-                args
+                parsed
             )  # This can fail with unrecognized arguments in the app
         except TypeError:
             arg_dict = {}
