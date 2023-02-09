@@ -37,9 +37,16 @@ dev = [
     "isort",
     "toml",
 ]
-test = ["coverage", "pytest"]
-docs = ["coverage",]
-pyside2 = ["PySide2"]
+test = [
+    "coverage",
+    "pytest"
+]
+docs = [
+    "coverage",
+]
+pyside2 = [
+    "PySide2",
+]
 
 [project.urls]
 "Homepage" = "https://github.com/renderbox/atlas-framework"
