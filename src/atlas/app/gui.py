@@ -1,7 +1,11 @@
 import sys, os
 from .base import AppBase
+import inspect
 
-from PySide2 import QtCore, QtGui, QtUiTools
+from PySide2.QtUiTools import QUiLoader
+from PySide2.QtWidgets import QApplication
+from PySide2.QtCore import QFile, QCoreApplication
+from PySide2 import QtCore
 
 
 class Pyside2Mixin(AppBase):
@@ -19,7 +23,7 @@ class Pyside2Mixin(AppBase):
 
         # Check for a GUI file
         if not self.gui_file:
-            self.gui_file = __name__ + ".ui"
+            self.gui_file = self.__class__.__name__ + ".ui"
 
     def add_arguments(self):
         """Args that need to be included in the app"""
@@ -30,9 +34,9 @@ class Pyside2Mixin(AppBase):
         if self.arg_dict.get("no_gui", False):
             super.__call__(ctx=ctx)
         else:
-            ctx.gui_mode = True
             if not ctx:
                 ctx = self.ctx
+            ctx.gui_mode = True
             self.run_gui(self.ctx)
 
     def load_gui(self):
@@ -42,16 +46,23 @@ class Pyside2Mixin(AppBase):
         Args:
             ctx (Context): Context to execute the tool with
         """
-        self.app = QtGui.QApplication(sys.argv)
+        QCoreApplication.setAttribute(QtCore.Qt.AA_ShareOpenGLContexts)
+
+        self.app = QApplication(sys.argv)
+
+        # Get the path to the App Class Instance being evaluated
+
+        gui_path = os.path.join(
+            os.path.dirname(inspect.getfile(self.__class__)), self.gui_file
+        )
 
         # Load the UI file
-        loader = QtUiTools.QUiLoader()
-        gui_path = os.path.join(os.path.dirname(__file__), self.gui_file)
-        uifile = QtCore.QFile(gui_path)
-        uifile.open(QtCore.QFile.ReadOnly)
+        uifile = QFile(gui_path)
+        uifile.open(QFile.ReadOnly)
+        loader = QUiLoader()
 
         # Attach the loaded results to the main_window variable
-        self.main_window = loader.load(uifile, None)
+        self.main_window = loader.load(uifile)
 
         uifile.close()
 
