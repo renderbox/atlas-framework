@@ -3,6 +3,9 @@ from atlas.context import Context, camel_case_spaced
 
 
 class AppBase:
+    """
+    This is the development level base class and should not be
+    """
 
     ctx = None
     argparser = None
@@ -40,14 +43,14 @@ class AppBase:
 
     def parse_args(self):
         """parse args based on the input"""
-        parsed, unknown = self.argparser.parse_known_args()
+        parsed, extra_args = self.argparser.parse_known_args()
         try:
-            arg_dict = vars(
+            self.arg_dict = vars(
                 parsed
             )  # This can fail with unrecognized arguments in the app
         except TypeError:
-            arg_dict = {}
-        return arg_dict
+            self.arg_dict = {}
+        return self.arg_dict
 
     # Create and set the Context object
     def set_context(self, ctx):
@@ -61,7 +64,8 @@ class AppBase:
         Returns:
             Context: Instance of the Context Class
         """
-        self.ctx = ctx if ctx else self.context_class(args=self.parse_args())
+        args = self.parse_args()  # TODO: Handle extra args
+        self.ctx = ctx if ctx else self.context_class(args=args)
         return self.ctx
 
     def __call__(self, ctx=None):

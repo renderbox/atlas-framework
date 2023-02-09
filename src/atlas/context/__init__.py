@@ -28,6 +28,7 @@ class Context(dict):
     key_renamer = lower_snake_case
     config_parser = None
     include_env = True
+    gui_mode = False
 
     def __init__(self, *pargs, args=None, config=None, **kwargs):
         super().__init__(*pargs, **kwargs)
