@@ -1,5 +1,7 @@
+#!/usr/bin/env python3
 from atlas.app import App
 from atlas.app.gui import Pyside2Mixin
+from PySide2.QtWidgets import QApplication, QPushButton, QLineEdit
 
 
 class SampleGuiApp(Pyside2Mixin, App):
@@ -12,6 +14,16 @@ class SampleGuiApp(Pyside2Mixin, App):
 
     def run(self, ctx):
         print("Hello All")
+
+    def connect_signals_and_slots(self):
+        self.line = self.window.findChild(QLineEdit, "lineEdit")
+
+        btn = self.window.findChild(QPushButton, "pushButton")
+        btn.clicked.connect(self.ok_handler)
+
+    def ok_handler(self):
+        language = "None" if not self.line.text() else self.line.text()
+        print("Favorite language: {}".format(language))
 
 
 def main():

@@ -14,16 +14,26 @@ class Pyside2Mixin(AppBase):
     By default, running the app via CLI is available with the --no_gui flag.
     pre() and post() will not be called when using a GUI so it's up to the
     developer to include them as needed in run_gui().
+
+    If you provide a GUI Class, that will be used first, followed by a provided name and
+    finally by a .ui file named the same as the class at the same path level as the module file.
+
+    Whatever GUI file is provided it assumes the path is relative to the file where your
+    App is defined.
     """
 
     gui_file = None
+    gui_class = None
 
     def __init__(self, ctx=None, argparser=None):
         super().__init__(ctx=ctx, argparser=argparser)
 
-        # Check for a GUI file
+        # Check for a GUI file and make it the same as the App Class if its empty
         if not self.gui_file:
-            self.gui_file = self.__class__.__name__ + ".ui"
+            self.gui_file = self.get_gui_file_name()
+
+    def get_gui_file_name(self):
+        return self.__class__.__name__ + ".ui"
 
     def add_arguments(self):
         """Args that need to be included in the app"""
@@ -50,25 +60,27 @@ class Pyside2Mixin(AppBase):
 
         self.app = QApplication(sys.argv)
 
-        # Get the path to the App Class Instance being evaluated
+        if self.gui_class:
+            self.window = self.gui_class()
+        else:
+            # Get the path to the App Class Instance being evaluated
+            gui_path = os.path.join(
+                os.path.dirname(inspect.getfile(self.__class__)), self.gui_file
+            )
 
-        gui_path = os.path.join(
-            os.path.dirname(inspect.getfile(self.__class__)), self.gui_file
-        )
+            # Load the UI file
+            uifile = QFile(gui_path)
+            uifile.open(QFile.ReadOnly)
+            loader = QUiLoader()
 
-        # Load the UI file
-        uifile = QFile(gui_path)
-        uifile.open(QFile.ReadOnly)
-        loader = QUiLoader()
+            # Attach the loaded results to the window variable
+            self.window = loader.load(uifile)
 
-        # Attach the loaded results to the main_window variable
-        self.main_window = loader.load(uifile)
-
-        uifile.close()
+            uifile.close()
 
         self.connect_signals_and_slots()
 
-        self.main_window.show()
+        self.window.show()
         sys.exit(self.app.exec_())
 
     def connect_signals_and_slots(self):
