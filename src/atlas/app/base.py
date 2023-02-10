@@ -4,7 +4,8 @@ from atlas.context import Context, camel_case_spaced
 
 class AppBase:
     """
-    This is the development level base class and should not be
+    This is the development level base class and should not be subclassed directly.
+    Use the App Class one level above.
     """
 
     ctx = None

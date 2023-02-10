@@ -1,5 +1,5 @@
 import sys, os
-from .base import AppBase
+
 import inspect
 
 from PySide2.QtUiTools import QUiLoader
@@ -8,7 +8,7 @@ from PySide2.QtCore import QFile, QCoreApplication
 from PySide2 import QtCore
 
 
-class Pyside2Mixin(AppBase):
+class Pyside2Mixin:
     """
     This will add Pyside2 based GUI controls for your application.
     By default, running the app via CLI is available with the --no_gui flag.
