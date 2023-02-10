@@ -1,7 +1,7 @@
-from atlas.app.cli import CLIApp
+from atlas.app import App
 
 
-class SampleApp(CLIApp):
+class SampleApp(App):
 
     description = "This is a sample App"
 
