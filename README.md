@@ -4,6 +4,12 @@ This is a simple framework for creating Class based applications that can be run
 
 ## Example
 
+You can run our sample app by checking out the repo, installing the packages and then using the following command line below. It's reconmended that you use a virtual environment and not install packages globally.
+
+```bash
+> python tests/sample_gui.py
+```
+
 Here is a simple CLI app to show how this all works.
 
 ```python

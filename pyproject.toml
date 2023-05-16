@@ -7,7 +7,7 @@ universal = true
 
 [project]
 name = "atlas-framework"
-version = "0.1.2"
+version = "0.1.3"
 authors = [
   { name="Grant Viklund", email="renderbox@gmail.com" },
 ]
