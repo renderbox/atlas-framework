@@ -73,15 +73,18 @@ class Pyside2Mixin:
             uifile.open(QFile.ReadOnly)
             loader = QUiLoader()
 
-            # Attach the loaded results to the window variable
-            self.window = loader.load(uifile)
+            try:
+                # Attach the loaded results to the window variable
+                self.window = loader.load(uifile)
+            except RuntimeError as e:
+                print(
+                    "Could not load the file: {}\nOne is needed to use a PySide2 GUI based app.".format(
+                        gui_path
+                    )
+                )
+                print(e)
 
             uifile.close()
-
-        self.connect_signals_and_slots()
-
-        self.window.show()
-        sys.exit(self.app.exec_())
 
     def connect_signals_and_slots(self):
         """Step that will connect signals and slots from the UI file to code"""
@@ -96,3 +99,8 @@ class Pyside2Mixin:
             ctx (Context): Context to execute the tool with
         """
         self.load_gui()
+
+        self.connect_signals_and_slots()
+
+        self.window.show()
+        sys.exit(self.app.exec_())

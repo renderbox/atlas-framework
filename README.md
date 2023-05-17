@@ -13,10 +13,10 @@ You can run our sample app by checking out the repo, installing the packages and
 Here is a simple CLI app to show how this all works.
 
 ```python
-from atlas.app.cli import CLIApp
+from atlas.app.base import AppBase
 
 
-class SampleApp(CLIApp):
+class SampleApp(AppBase):
 
     description = "This is a sample App"
 
@@ -43,13 +43,14 @@ if __name__ == "__main__":
 This first step imports the app class to inherit from. In this case it's the CLIApp class.
 
 ```python
-from atlas.app.cli import CLIApp
+from atlas.app.base import AppBase
 ```
 
-The next thing we do is subclass the base app class (CLIApp) to make our own App Class.
+The next thing we do is subclass the base app class (AppBase) to make our own App Class. Every app using the Atlas
+Framework is based on AppBase. Other features (such as GUIs) are added as Mixin Classes, which we will get into later. For now we will stick with the basic CLI foundation.
 
 ```python
-class SampleApp(CLIApp):
+class SampleApp(AppBase):
     pass
 ```
 
