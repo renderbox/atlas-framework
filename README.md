@@ -122,3 +122,17 @@ setup(
 ```
 
 In both cases you will notice it's the name of the CLI app `sample_app` followed by `=` and then the import path to the module (`test.sample`), followed by a `:` and the method to call (`main`). When you install the package it will also link the executeable to work in your command line shell on Linux, MacOS and Windows.
+
+## Creating a GUI App
+
+Docs coming soon. Here is a teaser.
+
+```python
+from atlas.app import App
+from atlas.app.gui import Pyside2Mixin
+
+class SampleApp(Pyside2Mixin, App):
+    pass
+```
+
+Check out the test example in the repo under tests/sample_gui.py
