@@ -18,7 +18,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -e .[docs]    # Install your package with the docs extras
+          pip install .[docs]    # Install your package with the docs extras
 
       - name: Build documentation
         run: |
