@@ -1,0 +1,8 @@
+site_name: "Atlas Framework Docs"
+
+theme:
+  name: "material"
+
+plugins:
+  # - search
+  - mkdocstrings

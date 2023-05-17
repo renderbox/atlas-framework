@@ -136,3 +136,11 @@ class SampleApp(Pyside2Mixin, App):
 ```
 
 Check out the test example in the repo under tests/sample_gui.py
+
+## Making an Installed GUI App with PyInstaller
+
+BTW, if you are going to build an application with this using PyInstaller, make sure to include the ".ui" file in the spec file. The first value in the tuple is the path to the .ui file and the second is where to put it as part of the install.
+
+```bash
+datas=[('SampleApp.ui','.')],
+```

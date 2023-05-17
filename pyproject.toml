@@ -43,6 +43,9 @@ test = [
 ]
 docs = [
     "coverage",
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
 ]
 pyside2 = [
     "PySide2",
