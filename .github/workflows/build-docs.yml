@@ -18,14 +18,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install . mkdocs mkdocs-material mkdocstrings[python]   # Install your package with the docs extras
+          pip install mkdocs mkdocs-material mkdocstrings[python]
 
       - name: Build documentation
         run: |
           # Build your documentation
           # For example, if you're using MkDocs, create a mkdocs.yml configuration file in your repository root
           # Then run the following command:
-          mkdocs build --config-file mkdocs.yml --site-dir site/
+          mkdocs build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
