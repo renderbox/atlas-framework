@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from atlas.app import App
 from atlas.app.gui import Pyside2Mixin
-from PySide2.QtWidgets import QApplication, QPushButton, QLineEdit
+from PySide2.QtWidgets import QPushButton, QLineEdit
 
 
 class SampleGuiApp(Pyside2Mixin, App):
