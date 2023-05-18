@@ -6,9 +6,9 @@ on:
   # release:
   #   types: [published] # This should not update unless a version is published
 
-  push:
-    branches:
-      - main # or the branch you want to trigger the workflow on
+  # push:
+  #   branches:
+  #     - main # or the branch you want to trigger the workflow on
 
 jobs:
   build:
@@ -20,7 +20,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install mkdocs mkdocs-material mkdocstrings[python]
+          pip install mkdocs mkdocs-material mkdocstrings[python] coverage mkdocs-coverage
+
+      - name: Generate Coverage report
+        run: |
+          coverage html
 
       - name: Build documentation
         run: |

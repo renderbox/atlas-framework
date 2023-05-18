@@ -1,5 +1,6 @@
 site_name: "Atlas Framework Docs"
 repo_url: https://github.com/renderbox/atlas-framework
+watch: [src/atlas, docs]
 
 nav:
   - "index.md"

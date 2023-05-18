@@ -1,19 +1,41 @@
 # Atlas App Framework
 
-[API](api.md)
+## Philosophy
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+The Atlas App Framework was built out of over 15 years of Python experience developing apps for special use and across many different large scale Feature VFX and Animation Production pipelines, where the sheer amount of data is extremely high, integrations with 3rd parties is a constant and the end product needs to just be robust, but simply never fail.
 
-## Commands
+Out of this the need for a standard way for TDs and Engineers to develop dependable, ready for production apps very quickly
 
-- `mkdocs new [dir-name]` - Create a new project.
-- `mkdocs serve` - Start the live-reloading docs server.
-- `mkdocs build` - Build the documentation site.
-- `mkdocs -h` - Print help message and exit.
+The framework has a couple core elements to it's design:
 
-## Project layout
+- **Pure Core Python** - The framework should be as free from external dependencies as possible, so as a result the library only brings in what is needed, if its needed.
+- **The App Class _is_ the Boilerplate** - Your App should avoid writting boilerplate whenever possible. That kind of code should be kept as constant as possible so it's DRY, robust and dependable.
+- **Focus On Business Logic** - Since Atlas takes care of the boilerplate, you are free to focus on the logic you need to implement.
+- **App Classes are _Classes_** - App classes themselves can be imported and used inside of other App classes or within other applications that support it (Maya, etc). This maximizes the code usage with DRY principles and lets you adapt the tool for the context it is written in.
+- **Mixins add Features** - If an important and highly reuseable feature is created (like adding a Pyside2 GUI), it should be added to you class using the mixin pattern. This extends what makes up the _boilerplate_ for your app with something that is thuroughly tested and ready for use.
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+With that in mind, lets get to the next step, Getting Started.
+
+## Getting Started
+
+If this is your fist time here, check out the [Getting Started](gettingstarted.md) page to understand how to build something quickly with the Atlas App Framework.
+
+## Pyside2 GUI App
+
+Here is where you can extend your learning and create Pyside2 GUI based apps: [PySide2 GUI Apps](pyside2app.md).
+
+## Installed App
+
+Here is where you can find the docs on how to make your app installable: [Installed Apps](installedapp.md).
+
+## API
+
+If you are already familiar with the framework, here are the [API](api.md) docs to help you dive a little furhter in.
+
+## Change Notes
+
+[Change Notes](change_notes.md) are available here.
+
+## Want to help?
+
+I am always open to people interested in helping make this an even more capable and robust project. If you are interested in helping, just add a support ticket and we will connect.
