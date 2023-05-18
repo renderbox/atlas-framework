@@ -16,9 +16,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Install package
+        run: |
+          pip  .
+
       - name: Install dependencies
         run: |
-          pip install mkdocs mkdocs-material mkdocstrings[python] .
+          pip install mkdocs mkdocs-material mkdocstrings[python]
 
       - name: Build documentation
         run: |
