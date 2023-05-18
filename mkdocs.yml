@@ -1,8 +1,30 @@
 site_name: "Atlas Framework Docs"
+repo_url: https://github.com/renderbox/atlas-framework
+
+nav:
+  - "index.md"
+  - "api.md"
+  - "change_notes.md"
 
 theme:
   name: "material"
 
 plugins:
-  # - search
-  - mkdocstrings
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          setup_commands:
+            - import sys
+            - sys.path.append('../src')
+# plugins:
+#   - mkdocstrings:
+#       config:
+#         module-first: src/atlas
+#       # watch:
+#       #   - src/atlas
+#       # handlers:
+#       #   python:
+#       #     setup_commands:
+#       #       - import sys
+#       #       - sys.path.append('src/atlas')
