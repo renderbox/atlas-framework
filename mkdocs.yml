@@ -5,26 +5,14 @@ nav:
   - "index.md"
   - "api.md"
   - "change_notes.md"
+  - Coverage report: coverage.md
 
 theme:
   name: "material"
 
 plugins:
   - search
-  - mkdocstrings:
-      handlers:
-        python:
-          setup_commands:
-            - import sys
-            - sys.path.append('../src')
-# plugins:
-#   - mkdocstrings:
-#       config:
-#         module-first: src/atlas
-#       # watch:
-#       #   - src/atlas
-#       # handlers:
-#       #   python:
-#       #     setup_commands:
-#       #       - import sys
-#       #       - sys.path.append('src/atlas')
+  - coverage:
+      page_name: coverage # default
+      html_report_dir: htmlcov # default
+  - mkdocstrings

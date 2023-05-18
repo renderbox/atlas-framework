@@ -1,8 +1,10 @@
 name: Build and Deploy Docs
 
 on:
-  release:
-    types: [published] # This should not update unless a version is published
+  push:
+    branches: ["develop"]
+  # release:
+  #   types: [published] # This should not update unless a version is published
 
   push:
     branches:
@@ -15,10 +17,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Install package
-        run: |
-          pip install .
 
       - name: Install dependencies
         run: |
