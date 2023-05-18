@@ -6,14 +6,14 @@ nav:
   - "index.md"
   - "api.md"
   - "change_notes.md"
-  - Coverage report: coverage.md
+  # - Coverage report: coverage.md
 
 theme:
   name: "material"
 
 plugins:
   - search
-  - coverage:
-      page_name: coverage # default
-      html_report_dir: htmlcov # default
+  # - coverage:
+  #     page_name: coverage # default
+  #     html_report_dir: htmlcov # default
   - mkdocstrings
