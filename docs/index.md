@@ -18,7 +18,7 @@ With that in mind, lets get to the next step, Getting Started.
 
 ## Getting Started
 
-If this is your fist time here, check out the [Getting Started](gettingstarted.md) page to understand how to build something quickly with the Atlas App Framework.
+If this is your fist time here, check out the [Getting Started](getting_started.md) page to understand how to build something quickly with the Atlas App Framework.
 
 ## Pyside2 GUI App
 
@@ -26,7 +26,7 @@ Here is where you can extend your learning and create Pyside2 GUI based apps: [P
 
 ## Installed App
 
-Here is where you can find the docs on how to make your app installable: [Installed Apps](installedapp.md).
+Here is where you can find the docs on how to make your app installable: [Installed Apps](installed_app.md).
 
 ## API
 
