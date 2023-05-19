@@ -4,7 +4,7 @@ on:
   push:
     branches: ["develop"]
   # release:
-  #   types: [published] # This should not update unless a version is published
+  #   types: [published] # Docs should be updates on version published
 
   # push:
   #   branches:
