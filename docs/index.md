@@ -8,11 +8,11 @@ Out of this the need for a standard way for TDs and Engineers to develop dependa
 
 The framework has a couple core elements to it's design:
 
-- **Pure Core Python** - The framework should be as free from external dependencies as possible, so as a result the library only brings in what is needed, if its needed.
-- **The App Class _is_ the Boilerplate** - Your App should avoid writting boilerplate whenever possible. That kind of code should be kept as constant as possible so it's DRY, robust and dependable.
-- **Focus On Business Logic** - Since Atlas takes care of the boilerplate, you are free to focus on the logic you need to implement.
-- **App Classes are _Classes_** - App classes themselves can be imported and used inside of other App classes or within other applications that support it (Maya, etc). This maximizes the code usage with DRY principles and lets you adapt the tool for the context it is written in.
-- **Mixins add Features** - If an important and highly reuseable feature is created (like adding a Pyside2 GUI), it should be added to you class using the mixin pattern. This extends what makes up the _boilerplate_ for your app with something that is thuroughly tested and ready for use.
+- **Pure Standard Python** - The framework should be as free from external dependencies as possible. To meet this goal, the base of Atlas (for making CLI apps) has no external dependencies. The library only brings in what is needed (such as Pyside2 for GUIs) and the rest is up to you.
+- **The App Class _is_ the Boilerplate** - You should avoid re-writting boilerplate whenever possible. Boilerplate code should be kept as consistent & stable as possible so it's DRY, robust and dependable.
+- **Stay Focused On Business Logic** - Since Atlas takes care of the boilerplate, you are free to focus on the logic you need to implement.
+- **Apps are _Classes_** - App classes themselves can be imported and used inside of other App classes or within other applications that support it (Maya, etc). This maximizes the code usage with DRY principles and lets you adapt the tool for the context it is written in.
+- **Mixins as Feature Plugins** - If a highly reuseable feature is created (like adding a Pyside2 GUI), it should be added to your class using the mixin pattern. This extends what makes up the _boilerplate_ foundation for your app with something that is thuroughly tested and ready for use.
 
 With that in mind, lets get to the next step, Getting Started.
 

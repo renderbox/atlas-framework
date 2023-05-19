@@ -20,11 +20,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install mkdocs mkdocs-material mkdocstrings[python] coverage[toml] mkdocs-coverage
+          pip install mkdocs mkdocs-material mkdocstrings[python]
+        # coverage[toml] mkdocs-coverage
 
-      - name: Generate Coverage report
-        run: |
-          coverage html
+      # - name: Generate Coverage report
+      #   run: |
+      #     coverage html
 
       - name: Build documentation
         run: |
