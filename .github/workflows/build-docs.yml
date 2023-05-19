@@ -16,11 +16,13 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
         run: |
-          pip install mkdocs mkdocs-material mkdocstrings[python]
+          pip install mkdocs mkdocs-material mkdocs-gen-files mkdocs-literate-nav mkdocstrings[python]
         # coverage[toml] mkdocs-coverage
 
       # - name: Generate Coverage report
