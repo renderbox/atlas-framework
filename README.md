@@ -8,4 +8,6 @@ This is a simple framework for creating Class based applications that can be run
 
 ## Documentation
 
-Our docs can be found [here](docs/index.md) and will be moving to GHPages soon.
+Our docs can be found [here](https://renderbox.github.io/atlas-framework) on GitHub Pages.
+
+This project is tested against Python 3.7-3.11

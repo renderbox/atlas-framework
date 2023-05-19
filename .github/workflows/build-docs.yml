@@ -1,11 +1,11 @@
 name: Build and Deploy Docs
 
 on:
-  # push:
-  #   branches: ["develop"]
-  release:
-    types: [published] # Docs should be updates on version published
-  workflow_dispatch:
+  push:
+    branches: ["develop"]
+  # release:
+  #   types: [published] # Docs should be updates on version published
+  # workflow_dispatch:
 
 jobs:
   build:
