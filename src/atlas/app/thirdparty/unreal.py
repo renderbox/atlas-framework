@@ -2,7 +2,7 @@ import sys
 from PySide2.QtWidgets import QApplication
 
 try:
-    import unreal_engine as ue
+    import unreal as ue
 except ImportError:
     pass
 
@@ -14,7 +14,8 @@ class UnrealMixin:
     def __init__(self, ctx=None, argparser=None):
         super().__init__(ctx=ctx, argparser=argparser)
         try:
-            import unreal_engine as ue
+            # if this library is available, we are in unreal
+            import unreal as ue
 
             self.in_unreal = True
         except ImportError:

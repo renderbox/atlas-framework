@@ -9,6 +9,7 @@ class MayaMixin:
     def __init__(self, ctx=None, argparser=None):
         super().__init__(ctx=ctx, argparser=argparser)
         try:
+            # if this library is available, we are in maya
             import maya.cmds as cmds
 
             self.in_maya = True
