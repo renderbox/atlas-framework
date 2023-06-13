@@ -7,23 +7,6 @@ except ImportError:
     pass
 
 
-def get_unreal_main_window():
-    """
-    Get the Maya Main Window as a QWidget
-    """
-    app = QApplication(sys.argv)
-
-    def ticker_loop(delta_time):
-        app.processEvents()
-        return True
-
-    ticker = ue.add_ticker(ticker_loop)
-
-    root_window = ue.get_editor_window()
-
-    return root_window
-
-
 class UnrealMixin:
 
     in_unreal = False
@@ -36,3 +19,37 @@ class UnrealMixin:
             self.in_unreal = True
         except ImportError:
             pass
+
+    def run_gui(self, ctx):
+        """
+        Evaluated when in GUI mode.  By default just loads the GUI.
+        Can be overridden to do other things when loading a GUI.
+
+        Note that this does not use app.exec_() as it will result in Qt taking control of the UE loop.
+
+        For Unreal Hints, see:
+        https://github.com/20tab/UnrealEnginePython
+
+        Args:
+            ctx (Context): Context to execute the tool with
+        """
+
+        # If this is running inside of Unreal Editor, we need to add a ticker to the main loop
+        if self.in_unreal:
+
+            host_app = QApplication(sys.argv)
+
+            def ticker_loop(delta_time):
+                host_app.processEvents()
+                return True
+
+            ticker = ue.add_ticker(ticker_loop)
+
+            self.load_gui()
+            self.connect_signals_and_slots()
+            self.window.show()
+
+            root_window = ue.get_editor_window()
+            root_window.set_as_owner(self.window.winId())
+        else:
+            super().run_gui(ctx)

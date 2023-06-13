@@ -58,8 +58,6 @@ class Pyside2Mixin:
         """
         QCoreApplication.setAttribute(QtCore.Qt.AA_ShareOpenGLContexts)
 
-        self.app = QApplication(sys.argv)
-
         if self.gui_class:
             self.window = self.gui_class()
         else:
@@ -98,7 +96,8 @@ class Pyside2Mixin:
         Args:
             ctx (Context): Context to execute the tool with
         """
+        host_app = QApplication(sys.argv)
         self.load_gui()
         self.connect_signals_and_slots()
         self.window.show()
-        sys.exit(self.app.exec_())
+        sys.exit(host_app.exec_())
