@@ -16,16 +16,6 @@ class MayaMixin:
         except ImportError:
             pass
 
-    def get_maya_main_window(self):
-        """
-        Get the Maya Main Window as a QWidget
-        """
-        import maya.OpenMayaUI as omui
-        from shiboken2 import wrapInstance
-
-        main_window_ptr = omui.MQtUtil.mainWindow()
-        return wrapInstance(int(main_window_ptr), self.window)
-
     def run_gui(self, ctx):
         """
         Evaluated when in GUI mode.  By default just loads the GUI.
