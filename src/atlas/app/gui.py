@@ -99,8 +99,6 @@ class Pyside2Mixin:
             ctx (Context): Context to execute the tool with
         """
         self.load_gui()
-
         self.connect_signals_and_slots()
-
         self.window.show()
         sys.exit(self.app.exec_())
