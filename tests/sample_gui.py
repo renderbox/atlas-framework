@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 from atlas.app import App
-from atlas.app.gui import Pyside2Mixin
+from atlas.app.gui import Pyside2Mixin, Pyside2Widget
 from PySide2.QtWidgets import QPushButton, QLineEdit
+
+
+class DemoWidgetOne(Pyside2Widget):
+    pass
 
 
 class SampleGuiApp(Pyside2Mixin, App):
@@ -15,10 +19,13 @@ class SampleGuiApp(Pyside2Mixin, App):
     def run(self, ctx):
         print("Hello All")
 
-    def connect_signals_and_slots(self):
-        self.line = self.window.findChild(QLineEdit, "lineEdit")
+    def post_load_ui(self):
+        widget = DemoWidgetOne(parent=self.ui)
 
-        btn = self.window.findChild(QPushButton, "pushButton")
+    def connect_signals_and_slots(self):
+        self.line = self.ui.findChild(QLineEdit, "lineEdit")
+
+        btn = self.ui.findChild(QPushButton, "pushButton")
         btn.clicked.connect(self.ok_handler)
 
     def ok_handler(self):
