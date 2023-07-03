@@ -15,6 +15,7 @@ class Pyside2Base:
 
     gui_file = None
     gui_class = None
+    root = None  # The main window or loaded widget
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -49,14 +50,14 @@ class Pyside2Base:
 
     def load_gui(self, parent=None):
         """
-        Load the GUI and run.
+        Load and create the root GUI with any children already included
 
         Args:
             ctx (Context): Context to execute the tool with
         """
 
         if self.gui_class:
-            self.ui = self.gui_class()
+            self.root = self.gui_class()
         else:
             # Get the path to the App Class Instance being evaluated
             gui_path = os.path.join(
@@ -70,7 +71,7 @@ class Pyside2Base:
 
             try:
                 # Attach the loaded results to the window variable
-                self.ui = loader.load(uifile)
+                self.root = loader.load(uifile)
             except RuntimeError as e:
                 print(
                     "Could not load the file: {}\nOne is needed to use a PySide2 GUI based app.".format(
@@ -109,6 +110,8 @@ class Pyside2Mixin(Pyside2Base):
 
     Whatever GUI file is provided it assumes the path is relative to the file where your
     App is defined.
+
+    On an app class, the main window will be available as self.root.
     """
 
     def add_arguments(self):
@@ -139,7 +142,6 @@ class Pyside2Mixin(Pyside2Base):
         host_app = QApplication(sys.argv)
 
         super().setup_ui(ctx)
-
-        self.ui.show()
+        self.root.show()
         # TODO: Add post() call after the app is closed to do any cleanup
         sys.exit(host_app.exec_())
