@@ -13,7 +13,7 @@ class AppBase:
     description = "No Description set for this application"
     app_name = None  # Human Friendly Name like "App Base", default is class name
     epilog = None
-    context_class = Context
+    context_class = Context  # The Context Class to use for this app.  Can be overriden to use a custom Context Class.
     host = None
 
     def __init__(self, ctx=None, argparser=None):
@@ -89,6 +89,10 @@ class AppBase:
             self.ctx = self.create_context()
 
         return self.ctx
+
+    def create_context(self):
+        """Create a context object to use for the app.  This can be overridden to use a custom context object or method."""
+        return self.context_class()
 
     def __call__(self, ctx=None):
         """
