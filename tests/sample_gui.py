@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 from atlas.app import App
-from atlas.app.gui import Pyside2Mixin
-from PySide2.QtWidgets import QPushButton, QLineEdit
+from atlas.app.gui import Pyside2Mixin, Pyside2Widget
+from PySide2.QtWidgets import QPushButton, QLineEdit, QVBoxLayout
+
+
+class DemoWidgetOne(Pyside2Widget):
+    pass
 
 
 class SampleGuiApp(Pyside2Mixin, App):
-
     description = "This is a sample App"
 
     def add_arguments(self):
@@ -13,12 +16,19 @@ class SampleGuiApp(Pyside2Mixin, App):
         self.add_argument("-v", "--verbose", action="store_true")
 
     def run(self, ctx):
+        # Run is called if the --no_gui flag is used
         print("Hello All")
 
-    def connect_signals_and_slots(self):
-        self.line = self.window.findChild(QLineEdit, "lineEdit")
+    def post_load_ui(self):
+        widget = DemoWidgetOne(parent=self.root)
+        # self.window.horizontalLayout.addWidget(widget)
+        lay = self.root.findChild(QVBoxLayout, "verticalLayout")
+        lay.addWidget(widget)
 
-        btn = self.window.findChild(QPushButton, "pushButton")
+    def connect_signals_and_slots(self):
+        self.line = self.root.findChild(QLineEdit, "lineEdit")
+
+        btn = self.root.findChild(QPushButton, "pushButton")
         btn.clicked.connect(self.ok_handler)
 
     def ok_handler(self):

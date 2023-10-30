@@ -29,6 +29,7 @@ class Context(dict):
     config_parser = None
     include_env = True
     gui_mode = False
+    host = None
 
     def __init__(self, *pargs, args=None, config=None, **kwargs):
         super().__init__(*pargs, **kwargs)

@@ -12,20 +12,33 @@ class AppBase:
     argparser = None
     description = "No Description set for this application"
     app_name = None  # Human Friendly Name like "App Base", default is class name
-    epilog = None
-    context_class = Context
+    epilog = None  # Text to display at the end of the help
+    context_class = Context  # The Context Class to use for this app.  Can be overriden to use a custom Context Class.
+    host = None
 
     def __init__(self, ctx=None, argparser=None):
         if not self.app_name:
             self.app_name = camel_case_spaced(self.__class__.__name__)
 
+        self.determine_host()
+
         # If no argparser is set, create one
         if not argparser and not self.argparser:
             self.argparser = self.create_argparser()
 
+        # TODO: Add default arguments all apps should have here
+
         self.add_arguments()
 
+        self.parse_args()
+
         self.set_context(ctx)  # After the Arg Parser is created,
+
+        self.ctx.host = self.host
+
+    def determine_host(self):
+        if self.host is None:
+            self.host = "cli"
 
     def create_argparser(self):
         return argparse.ArgumentParser(
@@ -65,9 +78,21 @@ class AppBase:
         Returns:
             Context: Instance of the Context Class
         """
-        args = self.parse_args()  # TODO: Handle extra args
-        self.ctx = ctx if ctx else self.context_class(args=args)
+
+        # args = self.parse_args()  # TODO: Handle extra args
+
+        # If no context is passed in, create one
+        if ctx:
+            self.ctx = ctx
+            # TODO: Add any missing required args to the context
+        else:
+            self.ctx = self.create_context()
+
         return self.ctx
+
+    def create_context(self):
+        """Create a context object to use for the app.  This can be overridden to use a custom context object or method."""
+        return self.context_class()
 
     def __call__(self, ctx=None):
         """

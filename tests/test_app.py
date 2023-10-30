@@ -1,6 +1,5 @@
 import unittest
 
-# from atlas.app.cli import CLIApp
 from .sample import SampleApp
 
 
