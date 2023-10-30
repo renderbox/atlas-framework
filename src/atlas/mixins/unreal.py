@@ -14,8 +14,7 @@ class UnrealAppMixin:
 
                 self.host = "unreal"
             except ImportError:
-                pass
-        super().determine_host()  # Lets make sure we call the super class for any other checks
+                super().determine_host()  # If this does not work, call the superclass
 
     # def pre_load_ui(self):
     #     """Entry Point that will run before the UI is first loaded"""

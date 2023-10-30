@@ -17,8 +17,7 @@ class MayaAppMixin:
 
                 self.host = "maya"
             except ImportError:
-                pass
-        super().determine_host()
+                super().determine_host()  # If this does not work, call the superclass
 
     # def pre_load_ui(self):
     #     """Entry Point that will run before the UI is first loaded"""

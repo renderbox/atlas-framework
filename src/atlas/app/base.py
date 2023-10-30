@@ -12,7 +12,7 @@ class AppBase:
     argparser = None
     description = "No Description set for this application"
     app_name = None  # Human Friendly Name like "App Base", default is class name
-    epilog = None
+    epilog = None  # Text to display at the end of the help
     context_class = Context  # The Context Class to use for this app.  Can be overriden to use a custom Context Class.
     host = None
 
