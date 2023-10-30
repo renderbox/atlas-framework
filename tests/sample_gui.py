@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from atlas.app import App
 from atlas.app.gui import Pyside2Mixin, Pyside2Widget
-from PySide2.QtWidgets import QPushButton, QLineEdit, QHBoxLayout, QVBoxLayout
+from PySide2.QtWidgets import QPushButton, QLineEdit, QVBoxLayout
 
 
 class DemoWidgetOne(Pyside2Widget):
@@ -9,7 +9,6 @@ class DemoWidgetOne(Pyside2Widget):
 
 
 class SampleGuiApp(Pyside2Mixin, App):
-
     description = "This is a sample App"
 
     def add_arguments(self):
@@ -17,6 +16,7 @@ class SampleGuiApp(Pyside2Mixin, App):
         self.add_argument("-v", "--verbose", action="store_true")
 
     def run(self, ctx):
+        # Run is called if the --no_gui flag is used
         print("Hello All")
 
     def post_load_ui(self):

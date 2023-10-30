@@ -16,6 +16,7 @@ class Pyside2Base:
     gui_file = None
     gui_class = None
     root = None  # The main window or loaded widget
+    gui_lib = "PySide2"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -32,10 +33,15 @@ class Pyside2Base:
         Args:
             parent (QObject): Object that will be the parent of this Widget instance
         """
+        self.pre_load_ui()
         self.load_gui(parent=parent)
         self.post_load_ui()
         self.connect_signals_and_slots()
         self.post_connect_signals_and_slots()
+
+    def pre_load_ui(self):
+        """Entry Point that will run before the UI is first loaded"""
+        pass
 
     def post_load_ui(self):
         """Entry Point that will run after the UI is first loaded but before signals and slots are connected"""
@@ -138,6 +144,7 @@ class Pyside2Mixin(Pyside2Base):
         Args:
             ctx (Context): Context to execute the tool with
         """
+        # TODO: Should this be here?
         QCoreApplication.setAttribute(QtCore.Qt.AA_ShareOpenGLContexts)
         host_app = QApplication(sys.argv)
 
